@@ -83,14 +83,17 @@ MVPリリース時
 - いいね機能
 - コメント機能
 
-## 機能の実装方針予定
-- ログイン機能
-sorcery
-- 画像投稿機能
-Carrierwave
-MiniMagick
-- タグ絞り込み機能
-ransack
-- 位置情報機能
-Google Maps API
-Geocoding API
+## 技術スタック
+### 使用技術
+- バックエンド : Ruby on Rails
+- フロントエンド : JavaScript
+- データベース : MySQL
+- 認証 : Sorcery
+- 画像アップロード : Carrierwave, MiniMagick
+- タグ絞り込み : Ransack
+- 位置情報 : Google Maps API, Geocoding API
+- その他 : Docker
+### 使用予定技術
+- CI/CD : GitHub Actions
+- インフラ : AWS
+- テスト : RSpec, Capybara
