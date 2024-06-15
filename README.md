@@ -97,3 +97,6 @@ MVPリリース時
 - CI/CD : GitHub Actions
 - インフラ : AWS
 - テスト : RSpec, Capybara
+
+### 画面遷移図
+https://www.figma.com/design/XPqySUrTaEczcdbTjDl0AB/%E7%84%A1%E9%A1%8C?node-id=0-1&t=jpxYv2w72mphSD5A-1
