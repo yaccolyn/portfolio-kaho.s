@@ -109,3 +109,6 @@ MVPリリース時
 
 ### 画面遷移図
 https://www.figma.com/design/XPqySUrTaEczcdbTjDl0AB/%E7%84%A1%E9%A1%8C?node-id=0-1&t=jpxYv2w72mphSD5A-1
+
+### ER図
+![ER](https://github.com/yaccolyn/portfolio-kaho.s/blob/main/ER%E5%9B%B3_runteq_%20portfolio.jpg)
