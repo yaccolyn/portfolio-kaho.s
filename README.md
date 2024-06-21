@@ -111,4 +111,4 @@ MVPリリース時
 https://www.figma.com/design/XPqySUrTaEczcdbTjDl0AB/%E7%84%A1%E9%A1%8C?node-id=0-1&t=jpxYv2w72mphSD5A-1
 
 ### ER図
-[![Image from Gyazo](https://i.gyazo.com/a5a43879cd74acd5c0910cde5fd561af.png)](https://gyazo.com/a5a43879cd74acd5c0910cde5fd561af)
+[![Image from Gyazo](https://i.gyazo.com/8e5aab19291aab19d6e06ec4e32e9012.png)](https://gyazo.com/8e5aab19291aab19d6e06ec4e32e9012)
