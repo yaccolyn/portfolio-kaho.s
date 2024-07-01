@@ -1,0 +1,2 @@
+class LocationInformation < ApplicationRecord
+end
