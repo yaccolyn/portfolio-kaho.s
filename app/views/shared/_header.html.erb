@@ -1,7 +1,7 @@
 <header>
   <nav class='navbar navbar-expand-lg navigation navbar-warning bg-warning'>
     <%= link_to root_path, class: 'navbar-brand' do %>
-      <%= image_tag '#' %>
+      <%= image_tag('bread_sample.jpg', class: 'img-fluid', alt: 'Bread Sample') %>
     <% end %>
     <button class='navbar-toggler' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
       aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
@@ -13,7 +13,7 @@
 
         <li class='nav-item dropdown dropdown-slide'>
           <%= link_to 'マイページ', '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
-            <%= image_tag '#', class: 'rounded-circle mr15', width: '40', height: '40' %>
+            <%= image_tag ('bread_sample.jpg', class: 'img-fluid', alt: 'Bread Sample'), class: 'rounded-circle mr15', width: '40', height: '40' %>
           <% end %>
         </li>
       </ul>
