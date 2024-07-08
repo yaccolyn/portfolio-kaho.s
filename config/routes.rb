@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root 'static_pages#index'
+  resources :users, only: %i[new create]
 end
