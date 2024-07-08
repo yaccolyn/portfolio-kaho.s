@@ -1,29 +1,34 @@
 <nav id="bottom-navbar" class="navbar navbar-expand-lg navbar-warning bg-warning fixed-bottom">
   <div class="container-fluid px-2 py-1">
-    <ul class="navbar-nav flex-row justify-content-center align-items-center">
+    <!--<ul class="navbar-nav flex-row justify-content-center align-items-center">-->
+    <ul class="navbar-nav d-flex justify-content-center align-items-center w-100">
       <li class="nav-item mx-2">
         <%= link_to root_path, class: "nav-link text-center" do %>
-          <i class="fa-solid fa-house"></i>
-          <span class="d-block text-center">ホーム</span>
+          <!--<i class="fa-solid fa-house z-100" style="color:hotpink;"></i>-->
+          <i class="bi bi-house-door h2 text-light"></i>
+          <span class="d-block text-center text-light">ホーム</span>
         <% end %>
       </li>
       <li class="nav-item mx-2">
         <%= link_to root_path, class: "nav-link text-center" do %>
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <span class="d-block text-center">サーチ</span>
+          <!--<i class="fa-solid fa-magnifying-glass"></i>-->
+          <i class="bi bi-search h2 text-light"></i>
+          <span class="d-block text-center text-light">サーチ</span>
         <% end %>
       </li>
       <li class="nav-item mx-2">
         <%= link_to root_path, class: "nav-link text-center" do %>
-          <i class="fa-solid fa-pen-to-square"></i>
-          <span class="d-block text-center">ポスト</span>
+          <!--<i class="fa-solid fa-pen-to-square"></i>-->
+          <i class="bi bi-pencil-square h2 text-light"></i>
+          <span class="d-block text-center text-light">ポスト</span>
         <% end %>
       </li>
       <li class="nav-item mx-2">
         <%= link_to root_path, class: "nav-link text-center" do %>
-          <i class="fas fa-map-marked-alt"></i>
+          <!--<i class="fas fa-map-marked-alt"></i>-->
           <!--<i class="fa-solid fa-map"></i>-->
-          <!--<span class="d-block text-center">マップ</span>-->
+          <i class="bi bi-map h2 text-light"></i>
+          <span class="d-block text-center text-light">マップ</span>
         <% end %>
       </li>
     </ul>
