@@ -50,6 +50,8 @@ gem "bootsnap", require: false
 gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-sprockets' 
 gem 'mini_racer'
+gem "font-awesome-sass", "~> 6.5.2"
+gem 'sorcery'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
