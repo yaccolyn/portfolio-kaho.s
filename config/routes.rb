@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
   resources :users, only: %i[new create]
+  get 'static_pages/test', to: 'static_pages#test', as: :static_pages_test
 end
