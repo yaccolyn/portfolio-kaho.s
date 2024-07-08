@@ -1,38 +1,37 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <h1 class="font-weight-bold mb-4">タイトル</h1>
-      <%= form_with model: @user, local: true, class: 'needs-validation', novalidate: true do |f| %>
-        <!--<%= render 'shared/error_messages', object: f.object %>-->
+    <div class=" col-md-10 col-lg-4 mx-auto">
+      <h1 class="font-weight-bold mb-4">ユーザー登録</h1>
+      <%= form_with model: @user, local: true, class: 'needs-validation', novalidate: true, data: { turbo: false } do |f| %>
         <div class="mb-3">
-          <%= f.label :name, class: 'form-label' %>
+          <%= f.label :name, 'ユーザー名', class: 'form-label' %>
           <%= f.text_field :name, class: 'form-control', required: true %>
           <!--<div class="invalid-feedback">
             <%= t('.name_error') %>
           </div>-->
         </div>
         <div class="mb-3">
-          <%= f.label :email, class: 'form-label' %>
+          <%= f.label :email, 'メールアドレス', class: 'form-label' %>
           <%= f.email_field :email, class: 'form-control', required: true %>
           <!--<div class="invalid-feedback">
             <%= t('.email_error') %>
           </div>-->
         </div>
         <div class="mb-3">
-          <%= f.label :password, class: 'form-label' %>
+          <%= f.label :password, 'パスワード', class: 'form-label' %>
           <%= f.password_field :password, class: 'form-control', required: true %>
           <!--<div class="invalid-feedback">
             <%= t('.password_error') %>
           </div>-->
         </div>
         <div class="mb-3">
-          <%= f.label :password_confirmation, class: 'form-label' %>
+          <%= f.label :password_confirmation, 'パスワード確認', class: 'form-label' %>
           <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
           <!--<div class="invalid-feedback">
             <%= t('.password_confirmation_error') %>
           </div>-->
         </div>
-        <div class="d-grid gap-2">
+        <div class="text-center">
           <%= f.submit '登録', class: 'btn btn-primary' %>
         </div>
       <% end %>
