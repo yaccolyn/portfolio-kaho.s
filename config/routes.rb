@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   #get 'static_pages/test', to: 'static_pages#test', as: :static_pages_test
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
+  delete 'logout', to: 'user_sessions#destroy'
 end
