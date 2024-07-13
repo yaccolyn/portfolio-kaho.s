@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <h3>ファイルを選択</h3>
+      <h3>位置情報追加</h3>
+      <%= form_with model: @post, class: "new_post" do |f| %>
+        <div class="mb-3">
+          <%= f.label :title, '店舗名' %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :body, 'テキスト' %>
+          <%= f.text_area :body, class: "form-control", rows: "10" %>
+        </div>
+        <%= f.submit nil, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+#画像アップロード・位置情報随時追加
