@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+  def index
+    @posts = Post.includes(:user)
+  end
+
   def new
     @post = Post.new
   end
@@ -12,4 +16,11 @@ class PostsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:store_name, :content)
+  end
 end
+#picture,tag,comment,location_informationも随時permitに加える
