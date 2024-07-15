@@ -1,0 +1,33 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <article class="card p-3">
+        <div class='d-flex justify-content-end me-3'>
+          <%= link_to root_path, id: "button-edit-#{@post.id}" do %>#editパスへ変更
+            <i class='bi bi-pencil-fill'></i>
+          <% end %>
+          <%= link_to root_path, id: "button-delete-#{@post.id}", class: "ms-2" do %>#destroyパスへ変更
+            <i class="bi bi-trash-fill"></i>
+          <% end %>
+        </div>
+        <!-- 店舗名 -->
+        <div class="card-body ms-3">
+          <h3 class="text-left"><%= @post.store_name %></h3>
+          <ul class="list-inline">
+            <li class="list-inline-item"><%= "by #{@post.user.name}" %></li>
+            <li class="list-inline-item"><%= l @post.created_at, format: :long %></li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <p>タグ表示位置</p>
+            <p>画像表示位置</p>
+            <p><%= simple_format(@post.content) %></p>
+            <p>コメント表示位置</p>
+            <p>マップ表示位置</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
