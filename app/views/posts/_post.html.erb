@@ -1,7 +1,9 @@
 <div class="col-lg-6 mb-4">
   <div class="card h-100">
     <div class="card-body">
-      <h5 class="card-title"><%= post.store_name %></h5>
+      <h4 class="card-title">
+        <%= link_to post.store_name, post_path(post) %>
+      </h4>
       <h5>画像表示位置</h5>
     </div>
   </div>
