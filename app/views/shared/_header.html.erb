@@ -19,7 +19,7 @@
           <%= link_to login_path, class: 'nav-link text-light', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
             マイページ（あとでリンク修正）
             <!--<%= image_tag('bread_sample.jpg', class: 'img-fluid rounded-circle mr-2', alt: 'Bread Sample', width: '40', height: '40', style: 'object-fit: cover; object-position: center; border-raduis: 50%;') %>-->
-            <%= image_tag('bread_sample.jpg', class: 'img-fluid rounded-circle', alt: 'Bread Sample', style: 'object-fit: cover; object-position: center;', width: '40', height: '40') %>
+            <%= image_tag current_user.avatar_url, class: 'rounded-circle mr15', width: '40', height: '40' %>
           <% end %>
         </li>
       </ul>
