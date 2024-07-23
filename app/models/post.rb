@@ -5,7 +5,8 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :location_information, optional: true
 
+  mount_uploaders :images, ImageUploader
 end
 
-#comment,tag,picture,location_informationについては随時追加
+#comment,tag,location_informationについては随時追加
 #位置情報機能実装の時に, optional: trueは削除
