@@ -1,9 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
-      <h3>ファイルを選択</h3>
       <h3>位置情報追加</h3>
       <%= form_with model: @post, data: { turbo: false }, class: "new_post" do |f| %>
+        <div class="mb-3">
+          <%= f.label :images, '画像' %>
+          <%= f.file_field :images, multiple: true, class: "form-control", id: 'picture-input'%>
+        </div>
+        <div id="image-preview" class="image-preview"></div>
         <div class="mb-3">
           <%= f.label :store_name, '店舗名' %>
           <%= f.text_field :store_name, class: "form-control" %>
@@ -12,7 +16,7 @@
           <%= f.label :content, 'テキスト' %>
           <%= f.text_area :content, class: "form-control", rows: "10" %>
         </div>
-        <%= f.submit nil, class: "btn btn-primary" %>
+        <%= f.submit '投稿', class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

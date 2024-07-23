@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:user)
+    @posts = Post.includes(:user).order(created_at: :desc)
   end
 
   def new
@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:store_name, :content)
+    params.require(:post).permit(:store_name, :content, { images: [] })
   end
 end
 #picture,tag,comment,location_informationも随時permitに加える
