@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
+
+  def own?(post)
+    post.user_id == id
+  end
 end
