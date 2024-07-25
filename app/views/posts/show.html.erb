@@ -2,14 +2,16 @@
   <div class="row mb-3">
     <div class="fixed-width" style="width: 800px; margin: 0 auto;">
       <article class="card p-3">
-        <div class='d-flex justify-content-end me-3'>
-          <%= link_to root_path, id: "button-edit-#{@post.id}" do %>#editパスへ変更
-            <i class='bi bi-pencil-fill'></i>
-          <% end %>
-          <%= link_to root_path, id: "button-delete-#{@post.id}", class: "ms-2" do %>#destroyパスへ変更
-            <i class="bi bi-trash-fill"></i>
-          <% end %>
-        </div>
+        <% if current_user.own?(@post) %>
+          <div class='d-flex justify-content-end me-3'>
+            <%= link_to edit_post_path, id: "button-edit-#{@post.id}" do %>#editパスへ変更
+              <i class='bi bi-pencil-fill'></i>
+            <% end %>
+            <%= link_to root_path, id: "button-delete-#{@post.id}", class: "ms-2" do %>#destroyパスへ変更
+              <i class="bi bi-trash-fill"></i>
+            <% end %>
+          </div>
+        <% end %>
         <!-- 店舗名 -->
         <div class="card-body ms-3">
           <h3 class="text-left"><%= @post.store_name %></h3>
