@@ -4,11 +4,11 @@
       <article class="card p-3">
         <% if current_user.own?(@post) %>
           <div class='d-flex justify-content-end me-3'>
-            <%= link_to edit_post_path, id: "button-edit-#{@post.id}" do %>#editパスへ変更
-              <i class='bi bi-pencil-fill'></i>
+            <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}" do %>
+              <i class='bi bi-pencil-fill h4'></i>
             <% end %>
-            <%= link_to root_path, id: "button-delete-#{@post.id}", class: "ms-2" do %>#destroyパスへ変更
-              <i class="bi bi-trash-fill"></i>
+            <%= form_with url: post_path(@post), method: :delete, class: 'd-inline', data: { turbo: false } do %>
+              <button type="submit" class='nav-link btn btn-link text-primary ms-4' style="padding: 0; border: none;"><i class="bi bi-trash-fill h4"></i></button>
             <% end %>
           </div>
         <% end %>
@@ -24,7 +24,7 @@
           <div class="row">
             <p>タグ表示位置</p>
           </div>
-          <div calss="text-center">
+          <div class="text-center">
             <% if @post.images.any? %>
               <div class="d-flex justify-content-center flex-wrap">
                 <% @post.images.each do |image| %>
