@@ -7,8 +7,8 @@
             <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}" do %>
               <i class='bi bi-pencil-fill h4'></i>
             <% end %>
-            <%= form_with url: post_path(@post), method: :delete, class: 'd-inline', data: { turbo: false } do %>
-              <button type="submit" class='nav-link btn btn-link text-primary ms-4' style="padding: 0; border: none;"><i class="bi bi-trash-fill h4"></i></button>
+            <%= link_to post_path(@post), id: "button-delete-#{@post.id}", data: { turbo_method: :delete, turbo_confirm: '削除しますか？' }, class: "ms-2" do %>
+              <i class="bi bi-trash-fill h4"></i>
             <% end %>
           </div>
         <% end %>
