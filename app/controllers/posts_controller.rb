@@ -8,12 +8,20 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to posts_path, success: 'ポストに成功しました'
+      # 位置情報が設定されている場合、location_informationを作成または取得
+      if params[:post][:address].present?
+        location_info = LocationInformation.find_or_create_by(address: params[:post][:address])
+        @post.update(location_information: location_info)
+      end
+      
+      # 画像の保存やタグの処理はここに追加することも可能
+  
+      redirect_to post_path(@post), success: 'ポストを作成しました'
     else
-      flash.now[:danger] = 'ポストに失敗しました'
-      render :new, status: :unprocessable_entity
+      flash.now[:danger] = 'ポストを作成できませんでした'
+      render :new
     end
   end
 
@@ -49,7 +57,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:store_name, :content, { images: [] })
+    params.require(:post).permit(:store_name, :content, { images: [] }, location_information_attributes: [:address])
   end
 end
 #picture,tag,comment,location_informationも随時permitに加える

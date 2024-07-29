@@ -38,10 +38,35 @@
           <div class="row">
             <p><%= simple_format(@post.content) %></p>
             <p>コメント表示位置</p>
-            <p>マップ表示位置</p>
           </div>
+          <div id="map" style="height: 600px;"></div>
+
+            <script>
+              function initMap() {
+                // 地図要素を取得する（マーカーを表示させるために必要）
+                const mapElement = document.getElementById('map');
+
+                const mapOptions = {
+                  center: {lat: <%= @post.location_information.latitude %>, lng: <%= @post.location_information.longitude %>},
+                  zoom: 15
+                };
+
+                const map = new google.maps.Map(mapElement, mapOptions);
+
+                // マーカーを追加（Postの情報からマーカーを追加する）
+                const marker = new google.maps.Marker({
+                    position: {lat: <%= @post.location_information.latitude %>, lng: <%= @post.location_information.longitude %>},
+                    map: map,
+                    title: '<%= j @post.store_name %>'
+                  });
+              }
+            </script>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
+
         </div>
       </article>
     </div>
   </div>
 </div>
+
