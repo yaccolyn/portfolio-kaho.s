@@ -59,6 +59,20 @@ import * as bootstrap from "bootstrap"
      console.log('Input element not found.');
    }
 
+   // 既存の画像表示用	
+  const existingImages = document.querySelectorAll('.existing-image');	
+  if (existingImages.length > 0) {	
+  const cellSize = 300;	
+  const maxImages = 4;	
+  const rows = Math.ceil(existingImages.length / 2);	
+  const cols = existingImages.length < 2 ? 1 : 2;	
+  setContainerStyle(previewContainer, cols, cellSize);	
+  existingImages.forEach(input => {	
+  const imageUrl = input.value;	
+  appendImage(previewContainer, imageUrl, cellSize);	
+  });	
+    }
+
   // ポストの画像表示用
   const postContainers = document.querySelectorAll('.image-preview');
 

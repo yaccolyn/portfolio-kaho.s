@@ -31,6 +31,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = current_user.posts.find(params[:id])
+    @address = @post.location_information&.address
 
     unless current_user && current_user.own?(@post)
       flash[:danger] = '編集できません'
@@ -41,8 +42,13 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
+      if params[:post][:address].present?
+        location_info = LocationInformation.find_or_create_by(address: params[:post][:address])
+        @post.update(location_information: location_info)
+      end
       redirect_to post_path(@post), success: '編集できました'
     else
+      @address = params[:post][:address]
       flash.now[:danger] = '編集できませんでした'
       render :edit, status: :unprocessable_entity
     end
