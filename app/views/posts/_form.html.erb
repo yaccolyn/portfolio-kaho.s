@@ -1,13 +1,27 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
-      <h3>位置情報追加</h3>
       <%= form_with model: @post, data: { turbo: false }, class: "new_post" do |f| %>
         <div class="mb-3">
-          <%= f.label :images, '画像' %>
-          <%= f.file_field :images, multiple: true, class: "form-control", id: 'picture-input'%>
+          <i class="bi bi-pin-map-fill"></i>
+          <%= f.label :address, '位置情報', for: 'address-input' %>
+          <%= f.text_field :address, id: 'address-input' %>
         </div>
-        <div id="image-preview" class="image-preview"></div>
+        <div class="mb-3">
+          <%= f.label :images, '画像', for: 'picture-input' %>
+          <%= f.file_field :images, multiple: true, class: "form-control", id: 'picture-input' %>
+          <div id="image-preview" class="image-preview mt-3">
+            <% if @post.images.present? && @post.images.any? %>
+              <div class="d-flex flex-wrap">
+                <% @post.images.each do |image| %>
+                  <div class="col-6 p-2">
+                    <%= image_tag image.url, class: "img-thumbnail", style: "width: 100%; height: auto; object-fit: cover;" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
         <div class="mb-3">
           <%= f.label :store_name, '店舗名' %>
           <%= f.text_field :store_name, class: "form-control" %>
@@ -21,4 +35,19 @@
     </div>
   </div>
 </div>
-#画像アップロード・位置情報随時追加
+
+<!-- places APIを読み込む 
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['PLACES_API_KEY'] %>&libraries=places" ></script>-->
+
+<script>
+  document.addEventListener('turbo:load', function() {
+  var addressInput = document.getElementById('address-input');
+  if (addressInput) {
+    var autocomplete = new google.maps.places.Autocomplete(addressInput);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      var place = autocomplete.getPlace();
+      addressInput.value = place.formatted_address;
+    });
+  }
+  });
+</script>

@@ -8,12 +8,20 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to posts_path, success: 'ポストに成功しました'
+      # 位置情報が設定されている場合、location_informationを作成または取得
+      if params[:post][:address].present?
+        location_info = LocationInformation.find_or_create_by(address: params[:post][:address])
+        @post.update(location_information: location_info)
+      end
+      
+      # 画像の保存やタグの処理はここに追加することも可能
+  
+      redirect_to posts_path(@post), success: 'ポストを作成しました'
     else
-      flash.now[:danger] = 'ポストに失敗しました'
-      render :new, status: :unprocessable_entity
+      flash.now[:danger] = 'ポストを作成できませんでした'
+      render :new
     end
   end
 
@@ -23,6 +31,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = current_user.posts.find(params[:id])
+    @address = @post.location_information&.address
 
     unless current_user && current_user.own?(@post)
       flash[:danger] = '編集できません'
@@ -33,8 +42,13 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
+      if params[:post][:address].present?
+        location_info = LocationInformation.find_or_create_by(address: params[:post][:address])
+        @post.update(location_information: location_info)
+      end
       redirect_to post_path(@post), success: '編集できました'
     else
+      @address = params[:post][:address]
       flash.now[:danger] = '編集できませんでした'
       render :edit, status: :unprocessable_entity
     end

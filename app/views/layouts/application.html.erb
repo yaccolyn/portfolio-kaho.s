@@ -18,6 +18,32 @@
         padding-bottom: 70px;
       }
     </style>
+
+    <script>
+      const GOOGLE_MAPS_API_KEY = "<%= ENV['GOOGLE_MAPS_API_KEY'] %>";
+      const GEOCODING_API_KEY = "<%= ENV['GEOCODING_API_KEY'] %>";
+      const PLACES_API_KEY = "<%= ENV['PLACES_API_KEY'] %>";
+
+      function initMap() {
+        var addressInput = document.getElementById('address-input');
+        if (addressInput) {
+          var autocomplete = new google.maps.places.Autocomplete(addressInput);
+          autocomplete.setFields(['address_component', 'formatted_address']);
+          autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (place.formatted_address) {
+              addressInput.value = place.formatted_address;
+            }
+          });
+        }
+      }
+
+      //document.addEventListener('DOMContentLoaded', function() {
+      //   initMap();
+      // });
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['PLACES_API_KEY'] %>&libraries=places&callback=initMap"></script>
   </head>
 
   <body>
