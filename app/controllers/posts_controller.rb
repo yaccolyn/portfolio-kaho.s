@@ -18,7 +18,7 @@ class PostsController < ApplicationController
       
       # 画像の保存やタグの処理はここに追加することも可能
   
-      redirect_to post_path(@post), success: 'ポストを作成しました'
+      redirect_to posts_path(@post), success: 'ポストを作成しました'
     else
       flash.now[:danger] = 'ポストを作成できませんでした'
       render :new
@@ -63,7 +63,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:store_name, :content, { images: [] }, location_information_attributes: [:address])
+    params.require(:post).permit(:store_name, :content, { images: [] })
   end
 end
 #picture,tag,comment,location_informationも随時permitに加える

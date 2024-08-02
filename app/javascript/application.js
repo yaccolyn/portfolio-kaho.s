@@ -4,7 +4,7 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 
 
- document.addEventListener('DOMContentLoaded', () => {
+ document.addEventListener('turbo:load', () => {
    // フォームのプレビュー用
    const input = document.getElementById('picture-input');
    const previewContainer = document.getElementById('image-preview');

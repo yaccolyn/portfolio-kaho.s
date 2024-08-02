@@ -40,13 +40,14 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['PLACES_API_KEY'] %>&libraries=places" ></script>-->
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var addressInput = document.getElementById('address-input');
+  document.addEventListener('turbo:load', function() {
+  var addressInput = document.getElementById('address-input');
+  if (addressInput) {
     var autocomplete = new google.maps.places.Autocomplete(addressInput);
-
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
       var place = autocomplete.getPlace();
       addressInput.value = place.formatted_address;
     });
+  }
   });
 </script>
