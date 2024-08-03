@@ -64,11 +64,11 @@ COPY --from=build /rails /rails
 
 # フォルダを作成して権限を設定
 RUN mkdir -p public/uploads/post && \
-    chown -R rails:rails public/uploads/post
+    chown -R root:root public/uploads/post
 
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+    chown -R rails:rails db log storage tmp public/uploads/post
 USER rails:rails
 
 # Entrypoint prepares the database.
