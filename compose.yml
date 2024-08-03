@@ -25,6 +25,7 @@ services:
       - .:/myapp
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/myapp/node_modules
+      - ./public/uploads:/myapp/public/uploads
     environment:
       TZ: Asia/Tokyo
     ports:
