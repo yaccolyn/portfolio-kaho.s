@@ -42,6 +42,7 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
+      # 位置情報の処理
       if params[:post][:address].present?
         location_info = LocationInformation.find_or_create_by(address: params[:post][:address])
         @post.update(location_information: location_info)

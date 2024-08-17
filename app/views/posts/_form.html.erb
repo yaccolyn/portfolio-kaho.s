@@ -5,7 +5,7 @@
         <div class="mb-3">
           <i class="bi bi-pin-map-fill"></i>
           <%= f.label :address, '位置情報', for: 'address-input' %>
-          <%= f.text_field :address, id: 'address-input' %>
+          <%= f.text_field :address, id: 'address-input', value: @post.location_information&.address %>
         </div>
         <div class="mb-3">
           <%= f.label :images, '画像', for: 'picture-input' %>
