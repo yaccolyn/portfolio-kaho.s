@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root 'static_pages#index'
+  get 'terms_of_use', to: 'static_pages#terms_of_use'
+  get 'privacy_policy', to: 'static_pages#privacy_policy'
+
   resources :users, only: %i[new create]
   resources :posts, only: %i[new create index show edit update destroy]
 

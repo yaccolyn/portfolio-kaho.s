@@ -1,7 +1,85 @@
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+<style>
+  h2.darumadrop-one-regular {
+    font-family: "Darumadrop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  h4.zen-kurenaido-regular {
+  font-family: "Zen Kurenaido", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+/* 画像を半分のサイズにして中央揃え */
+.top-img {
+  max-width: 40%; /* 幅を50%に設定 */
+  height: auto;   /* 高さは自動で調整 */
+  display: block; /* ブロック要素にして、marginの自動設定を有効にする */
+  margin: 60px auto; /* 左右のマージンを自動にして中央揃えにする */
+
+</style>
+
+
+<div class="container">
+  <div class="max-w-md pb-5">
+    <%= image_tag 'index2.png', class: 'top-img' %>
+    <div class="text-center border-top border-dotted border-2 border-warning py-5">
+      <h2 class="darumadrop-one-regular">ちょきパンの つかいかた</h2>
+      <div class="mx-auto text-secondary">
+        <p>ちょきパンは、パン好きがより自分好みのパンと出会うためのサービスです。<br>パンと出会い、パンの断面をシェアし、パン屋巡りをもっともっと楽しみましょう。</p>
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+        <div class="w-25 h-1 rounded bg-danger"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4 text-center">
+        <div class="mb-4">
+          <%= image_tag 'search.PNG', class: 'img-fluid' %>
+        </div>
+        <h4 class="zen-kurenaido-regular">パン屋を検索してみよう</h4>
+        <p class="text-secondary">まずは、ページ下部の「検索」ボタンから、パン屋を検索・閲覧してみましょう。 スポットの検索方法は、「現在地から検索」と「住所・スポット名から検索」の二種類。リスト表示にすると、現在投稿されているすべてのスポットの情報を閲覧することができます。</p>
+      </div>
+      <div class="col-md-4 mb-4 text-center">
+        <div class="mb-4">
+          <%= image_tag 'signin2.PNG', class: 'img-fluid' %>
+        </div>
+        <h4 class="zen-kurenaido-regular">ユーザー登録をしてみよう</h4>
+        <p class="text-secondary">ちょきパンにユーザー登録すると、「パン屋情報の投稿」や「お気に入りのパン屋マップ作成」などができるようになります。</p>
+      </div>
+      <div class="col-md-4 mb-4 text-center">
+        <div class="mb-4">
+          <%= image_tag 'post.PNG', class: 'img-fluid' %>
+        </div>
+        <h4 class="zen-kurenaido-regular">お気に入りのスポットを投稿しよう</h4>
+        <p class="text-secondary">ユーザー登録ができたら、ページ下部の「投稿」ボタンから、あなたが見つけたお気に入りのパン屋を投稿してみましょう。</p>
+      </div>
+    </div>
+    <% unless logged_in? %>
+      <div class="text-center py-3">
+        <%= link_to login_path, class: 'btn btn-outline-primary' do %>
+          ユーザー登録をする
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+  <%= render 'shared/footer' %>
 </div>
+<footer class="bg-base-color px-2 mb-20">
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="px-2"> 
+      <%= link_to '利用規約', terms_of_use_path %>
+    </div>
+    <div class="px-2"> 
+      <%= link_to 'プライバシーポリシー', privacy_policy_path %>
+    </div>
+    <div class="px-2"> 
+      <%= link_to 'お問い合わせ', 'https://forms.gle/J1eiMBtJLH4VGG94A' %>
+    </div>
+  </div>
+  <hr class="my-2 border-b-1 border-bg-mitsuboshi-gray" />
+  <div class="text-xs text-center">
+    © 2024 ちょきパン - bread_cut_and_share -
+  </div>
+</footer>

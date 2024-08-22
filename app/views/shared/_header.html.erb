@@ -1,7 +1,16 @@
+<style>
+  .navbar-brand.darumadrop-one-regular {
+    font-family: "Darumadrop One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+    margin-left: 30px;
+  }
+</style>
 <header>
-  <nav class='navbar navbar-expand-lg navigation navbar-warning bg-warning'>
-    <%= link_to root_path, class: 'navbar-brand' do %>
-      <%= image_tag('bread_sample.jpg', class: 'img-fluid', alt: 'Bread Sample', width: '100', height: 'auto') %>
+  <nav class='navbar navbar-expand-lg navigation custom-navbar' style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <%= link_to root_path, class: 'navbar-brand darumadrop-one-regular' do %>
+      ちょきパン
     <% end %>
     <button class='navbar-toggler' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
       aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
@@ -10,19 +19,20 @@
 
     <div class='collapse navbar-collapse' id='navbarSupportedContent'>
       <ul class='navbar-nav ms-auto main-nav align-items-center'>
-        <li class='nav-item'>
-          <%= form_with url: logout_path, method: :delete, class: 'd-inline', data: { turbo: false } do %>
+        <li class='nav-item' style="margin-right: 20px;">
+          <%= form_with url: logout_path, method: :delete, class: 'd-flex flex-column align-items-center', data: { turbo: false } do %>
+            <i class="bi bi-box-arrow-left h1 text-light"></i>
             <button type="submit" class='nav-link btn btn-link text-light' style="padding: 0; border: none;">ログアウト</button>
           <% end %>
         </li>
-        <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to login_path, class: 'nav-link text-light', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
-            マイページ（あとでリンク修正）
-            <!--<%= image_tag('bread_sample.jpg', class: 'img-fluid rounded-circle mr-2', alt: 'Bread Sample', width: '40', height: '40', style: 'object-fit: cover; object-position: center; border-raduis: 50%;') %>-->
-            <%= image_tag current_user.avatar_url, class: 'rounded-circle mr15', width: '40', height: '40' %>
+        <li class='nav-item dropdown dropdown-slide d-flex align-items-center' style="margin-right: 20px;">
+          <%= link_to login_path, class: 'nav-link text-light d-flex flex-column align-items-center', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
+            <%= image_tag current_user.avatar_url, class: 'rounded-circle mb-2', width: '45', height: '45' %>
+            <span class="text-light">マイページ</span>
           <% end %>
         </li>
       </ul>
     </div>
   </nav>
 </header>
+#マイページリンク修正
