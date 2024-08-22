@@ -74,10 +74,6 @@ MVPリリース時
 - ユーザー登録機能
 - ログイン機能
 - 画像投稿機能
-- お気に入り保存機能
-- タグ絞り込み機能
-- タグ編集機能
-- タグ削除機能
 - 記事閲覧機能（未ログインでも閲覧可能）
 - 記事編集機能
 - 記事削除機能
@@ -91,21 +87,25 @@ MVPリリース時
 - コメント閲覧機能（未ログインでも閲覧可能）
 - プロフィール編集機能
 - パスワード変更機能
+- お気に入り保存機能
+- タグ絞り込み機能
+- タグ編集機能
+- タグ削除機能
 
 ## 技術スタック
 ### 使用技術
 - バックエンド : Ruby on Rails
-- フロントエンド : JavaScript
+- フロントエンド : JavaScript, bootstrap
 - データベース : MySQL
 - 認証 : Sorcery
 - 画像アップロード : Carrierwave, MiniMagick
-- タグ絞り込み : Ransack
-- 位置情報 : Google Maps API, Geocoding API
+- 位置情報 : Google Maps API, Geocoding API, places API
 - その他 : Docker
 ### 使用予定技術
 - CI/CD : GitHub Actions
 - インフラ : AWS
 - テスト : RSpec, Capybara
+- タグ絞り込み : Ransack
 
 ### 画面遷移図
 https://www.figma.com/design/XPqySUrTaEczcdbTjDl0AB/%E7%84%A1%E9%A1%8C?node-id=0-1&t=jpxYv2w72mphSD5A-1
