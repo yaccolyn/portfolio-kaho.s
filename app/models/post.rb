@@ -4,6 +4,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
   belongs_to :location_information, optional: true
+  has_many :favorites, dependent: :destroy
 
   accepts_nested_attributes_for :location_information
 

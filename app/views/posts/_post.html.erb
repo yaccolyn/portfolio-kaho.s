@@ -1,9 +1,14 @@
 <div class="fixed-width" style="width: 800px; margin: 0 auto;">
   <div class="card h-100">
     <div class="card-body">
-      <h4 class="card-title">
-        <%= link_to post.store_name, post_path(post) %>
-      </h4>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="card-title">
+          <%= link_to post.store_name, post_path(post) %>
+        </h4>
+        <% if post.user != current_user %>
+          <%= render 'favorite_buttons', post: post %>
+        <% end %>
+      </div>
       <% if post.images.any? %>
         <div class="d-flex justify-content-center">
           <div class="image-preview d-flex flex-wrap justify-content-center">
