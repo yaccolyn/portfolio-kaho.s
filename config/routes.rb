@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'static_pages#privacy_policy'
 
   resources :users, only: %i[new create]
-  resources :posts, only: %i[new create index show edit update destroy]
+  resources :posts, only: %i[new create index show edit update destroy] do
+    collection do
+      get :favorites
+    end
+  end
+  resources :favorites, only: %i[create destroy]
 
   #get 'static_pages/test', to: 'static_pages#test', as: :static_pages_test
   get 'login', to: 'user_sessions#new'
