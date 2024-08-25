@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :require_login, only: %i[index]
   def index
     @posts = Post.includes(:user).order(created_at: :desc)
+    @favorites = current_user.favorites.includes(:post)
   end
 
   def new
@@ -63,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def favorites
-    @favorite_posts = current_user.favorite_posts.includes(:user).order(created_at: :desc)
+    @favorite_posts = current_user.favorite_posts.includes(:user)
   end
 
   private

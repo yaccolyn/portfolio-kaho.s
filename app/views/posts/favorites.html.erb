@@ -1,0 +1,62 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="fixed-width" style="width: 800px; margin: 0 auto;">
+      <article class="card p-3">
+        <h3>お気に入りパンマップ</h3>
+        <div id="map" style="height: 600px; width:100%;"></div>
+        <script>
+          function initMap() {
+            const mapElement = document.getElementById('map');
+            const mapOptions = {
+                center: {lat: 35.681236, lng: 139.767125}, 
+                zoom: 10
+            };
+            const map = new google.maps.Map(mapElement, mapOptions);
+            const bounds = new google.maps.LatLngBounds();
+            
+            <% @favorite_posts.each do |post| %>
+                var position = {lat: <%= post.location_information.latitude %>, lng: <%= post.location_information.longitude %>};
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: '<%= j post.store_name %>'
+                });
+                bounds.extend(position);
+                
+                var infoWindowContent = `
+                  <div>
+                    <h5><%= j post.store_name %></h5>
+                    <p><%= j truncate(post.content, length: 50) %></p>
+                    <a href="<%= post_path(post) %>" id="details-link-<%= post.id %>">詳細を見る</a>
+                  </div>`;
+                
+                var infoWindow = new google.maps.InfoWindow({
+                    content: infoWindowContent
+                });
+                
+                marker.addListener('click', function() {
+                    infoWindow.open(map, marker);
+                });
+                
+                google.maps.event.addListener(infoWindow, 'domready', function() {
+                    var detailsLink = document.getElementById('details-link-<%= post.id %>');
+                    if (detailsLink) {
+                        detailsLink.addEventListener('click', function(event) {
+                            event.preventDefault(); 
+                            window.location.href = this.href; 
+                        });
+                    }
+                });
+            <% end %>
+            
+            map.fitBounds(bounds);
+          }
+          
+          document.addEventListener('turbo:load', function() {
+              initMap();
+          });
+        </script>
+      </article>
+    </div>
+  </div>
+</div>
