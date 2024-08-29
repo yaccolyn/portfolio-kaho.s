@@ -7,18 +7,28 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @tags = Tag.all
   end
 
   def create
     @post = current_user.posts.new(post_params)
+
     if @post.save
       # 位置情報が設定されている場合、location_informationを作成または取得
       if params[:post][:address].present?
         location_info = LocationInformation.find_or_create_by(address: params[:post][:address])
         @post.update(location_information: location_info)
       end
-      
-      # 画像の保存やタグの処理はここに追加することも可能
+
+
+      if @post.save
+        #tag_names = params[:post][:tags].split(',') # カンマ区切りの文字列を配列に変換
+        params[:post][:tags].split(',').each do |tag_name|
+          tag_name.strip!
+          tag = Tag.find_or_create_by(name: tag_name)
+          @post.tags << tag unless @post.tags.include?(tag)
+        end
+      end
   
       redirect_to posts_path(@post), success: 'ポストを作成しました'
     else
@@ -29,6 +39,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @tags = @post.tags
   end
 
   def edit

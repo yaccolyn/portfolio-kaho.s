@@ -39,6 +39,17 @@
             <p><%= simple_format(@post.content) %></p>
             <p>コメント表示位置</p>
           </div>
+          <div class="row">
+            <% if @post.tags.any? %>
+              <div class="d-flex flex-wrap">
+                <% @post.tags.each do |tag| %>
+                  <span class="badge bg-warning me-2 mb-2"><%= tag.name %></span>
+                <% end %>
+              </div>
+            <% else %>
+              <p>タグはありません。</p>
+            <% end %>
+          </div>
           <div id="map" style="height: 600px;"></div>
 
             <script>

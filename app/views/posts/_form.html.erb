@@ -30,6 +30,37 @@
           <%= f.label :content, 'テキスト' %>
           <%= f.text_area :content, class: "form-control", rows: "10" %>
         </div>
+        
+        <div class="mb-3">
+          <button class="btn btn-link text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTypes" aria-expanded="false" aria-controls="collapseTypes">
+            <h5 class="mb-0">タグ</h5>
+          </button>
+          <div id="collapseTypes" class="collapse mt-2">
+            <div class="btn-group d-flex flex-wrap" role="group" aria-label="パンの種類">
+              <% tags = [
+                "メロンパン", "カレーパン", "あんパン", "クリームパン", "ジャムパン", "コッペパン", "ウィンナーロール",
+                "ピザパン", "あんドーナツ", "明太フランス",
+                "バゲット", "パン・ド・カンパーニュ", "クロワッサン", "パン・オ・ショコラ", "クロワッサン・ザマンド", 
+                "ブリオッシュ", "クグロフ", "ベーコンエピ",
+                "プレッツェル", "ライ麦パン", "シュトーレン",
+                "スコーン", "イギリス食パン", "イングリッシュマフィン",
+                "デニッシュ",
+                "角食パン", "ロールパン", "ベーグル", "シナモンロール", "ドーナツ", "バブカ",
+                "ポンデケージョ", "フォカッチャ", "グリッシーニ", "パニーニ", "チャバタ", "パネットーネ",
+                "ピロシキ", "ふかっ", "もちっ", "もっちゅり", "ぎゅっ", "ざくっ", "サク", "ふわ", "とろ", "ちゅる", "うる", 
+        "パリ", "むち", "ハード", "高加水", "ソフト", "セミハード"
+              ] %>
+
+              <% tags.each do |tag_name| %>
+                <button type="button" class="btn btn-outline-warning m-1">
+                  <%= tag_name %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <%= f.hidden_field :tags, id: 'selected-tags' %>
         <%= f.submit '投稿', class: "btn btn-primary" %>
       <% end %>
     </div>
@@ -41,13 +72,36 @@
 
 <script>
   document.addEventListener('turbo:load', function() {
-  var addressInput = document.getElementById('address-input');
-  if (addressInput) {
-    var autocomplete = new google.maps.places.Autocomplete(addressInput);
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-      var place = autocomplete.getPlace();
-      addressInput.value = place.formatted_address;
+    // 住所の自動補完機能
+    var addressInput = document.getElementById('address-input');
+    if (addressInput) {
+      var autocomplete = new google.maps.places.Autocomplete(addressInput);
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        addressInput.value = place.formatted_address;
+      });
+    }
+
+    // タグ選択機能
+    var selectedTags = [];
+    document.querySelectorAll('.btn-group button').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var tagName = this.textContent.trim();
+
+        if (selectedTags.includes(tagName)) {
+          // すでに選択されているタグをクリックすると、選択を解除
+          selectedTags = selectedTags.filter(tag => tag !== tagName);
+          this.classList.remove('active');
+        } else {
+          // タグを選択
+          selectedTags.push(tagName);
+          this.classList.add('active');
+        }
+
+        // 隠しフィールドに選択されたタグを反映
+        var hiddenField = document.getElementById('selected-tags');
+         hiddenField.value = selectedTags.join(',');
+      });
     });
-  }
   });
 </script>
