@@ -4,10 +4,10 @@
       <article class="card p-3">
         <% if current_user.own?(@post) %>
           <div class='d-flex justify-content-end me-3'>
-            <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}" do %>
+            <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}", class: "link-blue" do %>
               <i class='bi bi-pencil-fill h4'></i>
             <% end %>
-            <%= link_to post_path(@post), id: "button-delete-#{@post.id}", data: { turbo_method: :delete, turbo_confirm: '削除しますか？' }, class: "ms-2" do %>
+            <%= link_to post_path(@post), id: "button-delete-#{@post.id}", data: { turbo_method: :delete, turbo_confirm: '削除しますか？' }, class: "ms-2 link-blue" do %>
               <i class="bi bi-trash-fill h4"></i>
             <% end %>
           </div>
@@ -38,6 +38,17 @@
           <div class="row">
             <p><%= simple_format(@post.content) %></p>
             <p>コメント表示位置</p>
+          </div>
+          <div class="row">
+            <% if @post.tags.any? %>
+              <div class="d-flex flex-wrap">
+                <% @post.tags.each do |tag| %>
+                  <span class="badge bg-warning me-2 mb-2"><%= tag.name %></span>
+                <% end %>
+              </div>
+            <% else %>
+              <p>タグはありません。</p>
+            <% end %>
           </div>
           <div id="map" style="height: 600px;"></div>
 
