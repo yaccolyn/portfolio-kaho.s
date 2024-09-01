@@ -11,6 +11,14 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :location_information
 
   mount_uploaders :images, ImageUploader
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["content", "store_name", "created_at", "id", "images", "location_information_id", "updated_at", "user_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["favorites", "location_information", "post_tags", "tags", "user"]
+  end
 end
 
 #commentについては随時追加
