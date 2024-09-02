@@ -65,14 +65,26 @@ document.addEventListener("turbo:load", function() {
 });
 
 function initMap() {
+  // 初期の中心位置を仮で設定（後で変更する）
+  let mapCenter = { lat: 35.6895, lng: 139.6917 };
+
+  // 最初の検索結果を中心に設定
+  <% if @posts.present? %>
+    <% first_post = @posts.find { |post| post.location_information.present? } %>
+    <% if first_post %>
+      mapCenter = { lat: <%= first_post.location_information.latitude %>, lng: <%= first_post.location_information.longitude %> };
+    <% end %>
+  <% end %>
+
+  // マップの初期化
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 35.6895, lng: 139.6917 }, // 初期位置は東京に設定
+    center: mapCenter,
     zoom: 12
   });
 
   // 検索結果のポストに基づいてマーカーを配置
   <% @posts.each do |post| %>
-    <% if post.location_information.present? %> 
+    <% if post.location_information.present? %>
       new google.maps.Marker({
         position: { lat: <%= post.location_information.latitude %>, lng: <%= post.location_information.longitude %> },
         map: map,
