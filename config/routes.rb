@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :posts, only: %i[new create index show edit update destroy] do
     collection do
       get :favorites
+      get 'tag/:tag_name', to: 'posts#tag', as: :tag
     end
   end
   resources :favorites, only: %i[create destroy]
