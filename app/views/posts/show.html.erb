@@ -22,7 +22,17 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <p>タグ表示位置</p>
+            <% if @post.tags.any? %>
+              <div class="d-flex flex-wrap">
+                <% @post.tags.each do |tag| %>
+                  <%= link_to tag_posts_path(tag_name: tag.name), class: "badge bg-warning me-2 mb-2" do %>
+                    <%= tag.name %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% else %>
+              <p>タグはありません。</p>
+            <% end %>
           </div>
           <div class="text-center">
             <% if @post.images.any? %>
@@ -37,19 +47,9 @@
           </div>
           <div class="row">
             <p><%= simple_format(@post.content) %></p>
-            <p>コメント表示位置</p>
           </div>
-          <div class="row">
-            <% if @post.tags.any? %>
-              <div class="d-flex flex-wrap">
-                <% @post.tags.each do |tag| %>
-                  <span class="badge bg-warning me-2 mb-2"><%= tag.name %></span>
-                <% end %>
-              </div>
-            <% else %>
-              <p>タグはありません。</p>
-            <% end %>
-          </div>
+          
+          <p>コメント表示位置</p>
           <div id="map" style="height: 600px;"></div>
 
             <script>

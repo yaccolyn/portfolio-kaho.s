@@ -96,6 +96,21 @@ class PostsController < ApplicationController
     @favorite_posts = current_user.favorite_posts.includes(:user)
   end
 
+  def tag
+    @tag = Tag.find_by(name: params[:tag_name])
+    if @tag
+      @q = Post.ransack(params[:q])
+      posts_per_page = 10
+      page = params[:page].to_i > 0 ? params[:page].to_i : 1
+      @posts = @tag.posts.order(created_at: :desc).offset((page - 1) * posts_per_page).limit(posts_per_page)
+      @total_pages = (@tag.posts.count.to_f / posts_per_page).ceil
+      @current_page = page
+    else
+      flash[:danger] = 'タグが見つかりません'
+      redirect_to posts_path
+    end
+  end
+
   private
 
   def post_params
