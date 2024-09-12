@@ -15,6 +15,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc)
+    @favorite_posts = Post.joins(:favorites).where(favorites: { user_id: @user.id }).order('favorites.created_at DESC')
+  end
+
   private
 
   def user_params

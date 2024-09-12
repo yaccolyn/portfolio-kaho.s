@@ -26,7 +26,7 @@
           <% end %>
         </li>
         <li class='nav-item dropdown dropdown-slide d-flex align-items-center' style="margin-right: 20px;">
-          <%= link_to login_path, class: 'nav-link text-light d-flex flex-column align-items-center', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
+          <%= link_to user_path(current_user), class: 'nav-link text-light d-flex flex-column align-items-center', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
             <%= image_tag current_user.avatar_url, class: 'rounded-circle mb-2', width: '45', height: '45' %>
             <span class="text-light">マイページ</span>
           <% end %>

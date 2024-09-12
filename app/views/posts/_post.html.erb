@@ -6,7 +6,7 @@
           <%= link_to post.store_name, post_path(post), class: "link-blue" %>
         </h4>
         <% if post.user != current_user %>
-          <%= render 'favorite_buttons', post: post %>
+          <%= render 'posts/favorite_buttons', post: post %>
         <% end %>
       </div>
       <% if post.images.any? %>
