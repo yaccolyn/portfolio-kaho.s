@@ -1,66 +1,55 @@
 <div class="container pt-3">
   <div class="row justify-content-center">
-    <div class="col-lg-7 offset-lg--1">
+    <div class="col-lg-10 offset-lg-1">
+      <!-- 検索フォーム -->
       <%= render 'search_form', q: @q, url: posts_path %>
-    </div>
-    <div class="col-lg-10 offset-lg-3 d-flex justify-content-start mb-3">
-      <!-- ボタンを検索窓と揃えて右に配置 -->
-      <button id="list-view" class="btn btn-custom me-2 d-none" onclick="toggleView('list')">リストビュー</button>
-      <button id="map-view" class="btn btn-custom" onclick="toggleView('map')">マップビュー</button>
-    </div>
-    <div id="list-view-container" class="col-12">
-      <div class="row justify-content-center">
-        <div class="col-md-10">
-          <div class="row">
-            <% if @posts.present? %>
-              <% @posts.each do |post| %>
-                <div class="col-12 mb-3 d-flex justify-content-center">
-                  <%= render post %>
-                </div>
-              <% end %>
-            <% else %>
-              <div class="col-12 mb-3">ポストがありません</div>
-            <% end %>
+      
+      <!-- タブのヘッダー -->
+      <ul class="nav nav-tabs justify-content-center mb-3" id="view-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active link-blue" id="list-tab" data-bs-toggle="tab" href="#list-view" role="tab" aria-controls="list-view" aria-selected="true">リストビュー</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link link-blue" id="map-tab" data-bs-toggle="tab" href="#map-view" role="tab" aria-controls="map-view" aria-selected="false">マップビュー</a>
+        </li>
+      </ul>
+
+      <!-- タブのコンテンツ -->
+      <div class="tab-content">
+        <!-- リストビュー -->
+        <div id="list-view" class="tab-pane fade show active" role="tabpanel" aria-labelledby="list-tab">
+          <div class="row justify-content-center">
+            <div class="col-md-10">
+              <div class="row">
+                <% if @posts.present? %>
+                  <% @posts.each do |post| %>
+                    <div class="col-12 mb-3 d-flex justify-content-center">
+                      <%= render post %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="col-12 mb-3">ポストがありません</div>
+                <% end %>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- マップビュー -->
+        <div id="map-view" class="tab-pane fade" role="tabpanel" aria-labelledby="map-tab">
+          <div id="map" style="height: 500px;"></div>
         </div>
       </div>
     </div>
-    <div id="map-view-container" class="d-none">
-        <div id="map" style="height: 500px;"></div>
-      </div>
   </div>
 </div>
+
 <script>
-function toggleView(view) {
-    if (view === 'list') {
-      document.getElementById('list-view-container').classList.remove('d-none');
-      document.getElementById('map-view-container').classList.add('d-none');
-      document.getElementById('list-view').classList.add('d-none');
-      document.getElementById('map-view').classList.remove('d-none');
-    } else {
-      document.getElementById('list-view-container').classList.add('d-none');
-      document.getElementById('map-view-container').classList.remove('d-none');
-      document.getElementById('map-view').classList.add('d-none');
-      document.getElementById('list-view').classList.remove('d-none');
-    }
-  }
 document.addEventListener("turbo:load", function() {
-  var listViewButton = document.getElementById("list-view");
-  var mapViewButton = document.getElementById("map-view");
-  var listViewContainer = document.getElementById("list-view-container");
-  var mapViewContainer = document.getElementById("map-view-container");
-
-  listViewButton.addEventListener("click", function() {
-    listViewContainer.classList.remove("d-none");
-    mapViewContainer.classList.add("d-none");
-  });
-
-  mapViewButton.addEventListener("click", function() {
-    listViewContainer.classList.add("d-none");
-    mapViewContainer.classList.remove("d-none");
-
-    // マップの初期化を行う
-    initMap();
+  // マップタブが表示されたら、マップを初期化する
+  var mapTab = document.getElementById("map-tab");
+  mapTab.addEventListener("shown.bs.tab", function () {
+    initMap(); // マップの初期化を行う
   });
 });
 
@@ -93,5 +82,4 @@ function initMap() {
     <% end %>
   <% end %>
 }
-
 </script>

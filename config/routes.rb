@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'terms_of_use', to: 'static_pages#terms_of_use'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
 
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create show]
   resources :posts, only: %i[new create index show edit update destroy] do
     collection do
       get :favorites
